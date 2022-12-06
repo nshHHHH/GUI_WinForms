@@ -49,10 +49,11 @@ namespace GUIWinForms {
 		   double angle;
 		   Pen^ pen;
 	private: System::Windows::Forms::Button^ button2;
-	private: System::Windows::Forms::TextBox^ textBox1;
+
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
+	private: System::Windows::Forms::NumericUpDown^ textBox1;
 
 		   Random^ random;
 		   
@@ -74,11 +75,12 @@ namespace GUIWinForms {
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->textBox1 = (gcnew System::Windows::Forms::NumericUpDown());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->textBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// pictureBox1
@@ -122,20 +124,13 @@ namespace GUIWinForms {
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(737, 12);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(100, 20);
-			this->textBox1->TabIndex = 2;
-			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Location = System::Drawing::Point(703, 15);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(14, 13);
-			this->label1->TabIndex = 3;
+			this->label1->TabIndex = 1;
 			this->label1->Text = L"P";
 			this->label1->Click += gcnew System::EventHandler(this, &MyForm::label1_Click);
 			// 
@@ -158,21 +153,32 @@ namespace GUIWinForms {
 			this->label3->TabIndex = 5;
 			this->label3->Text = L"x";
 			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(737, 13);
+			this->textBox1->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 999, 0, 0, 0 });
+			this->textBox1->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(100, 20);
+			this->textBox1->TabIndex = 6;
+			this->textBox1->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(849, 535);
+			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
-			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->pictureBox1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->textBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -205,6 +211,7 @@ namespace GUIWinForms {
 			m_y[i] = y;
 		}
 		for (int j = 0; j < 199; j++) {
+			Sleep(1);
 			Graphics^ formGraphics = this->pictureBox1->CreateGraphics();
 			formGraphics->FillRectangle(System::Drawing::Pens::Red->Brush, m_x[j] + 200, m_y[j] + 200, 1, 1);//одно значение y
 			formGraphics->FillRectangle(System::Drawing::Pens::Red->Brush, m_x[j] + 200, 0 - m_y[j] + 200, 1, 1);// второе значение y
@@ -215,6 +222,8 @@ namespace GUIWinForms {
 private: System::Void label1_Click(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void label2_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void textBox1_TextChanged(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
